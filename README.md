@@ -33,3 +33,8 @@ To get the project running after you've cloned the repository:
 
 1. Make sure all files (`index.html`, `style.css`, `script.js`) are kept in the same directory.
 2. Double-click the `index.html` file to open it in your web browser.
+
+
+
+
+Created by Katarzyna Przybył 
