@@ -33,25 +33,40 @@ document.addEventListener('DOMContentLoaded', function () {
     analyser.getByteFrequencyData(dataArray);
 
     let columns = 10; 
-    let rows = 10; 
-    let dataPointsPerColumn = dataArray.length / columns;
+    let rows = 10;
+
+    for (let i = 0; i < grid.children.length; i++) {
+        grid.children[i].style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
+    }
+
+    let midIndex = Math.floor(dataArray.length / 2);
+    let quarterIndex = Math.floor(dataArray.length / 4);
 
     for (let i = 0; i < columns; i++) {
+        let frequencySum = 0;
+        let totalSamples = 0;
+        
+        let startIndex = midIndex + (i - columns / 2) * (quarterIndex / 2);
+        let endIndex = startIndex + (quarterIndex / 3); 
+        
+        startIndex = Math.max(0, startIndex);
+        endIndex = Math.min(dataArray.length, endIndex);
+
+        for (let j = startIndex; j < endIndex; j++) {
+            frequencySum += dataArray[j];
+            totalSamples++;
+        }
+ 
+        let intensity = totalSamples > 0 ? (frequencySum / totalSamples) / 255 : 0;
+        
         for (let j = 0; j < rows; j++) {
-  
-            let boxIndex = (rows - 1 - j) * columns + i; 
-            let dataValueIndex = Math.floor(i * dataPointsPerColumn + j * dataPointsPerColumn / rows);
-            
-          
-            if (dataValueIndex < dataArray.length) {
-                let intensity = dataArray[dataValueIndex] / 255;
-                let box = grid.children[boxIndex];
-                box.style.opacity = intensity;
-                box.style.backgroundColor = `rgba(0, 255, 0, ${intensity})`;
+            let boxIndex = (rows - 1 - j) * columns + i;
+            if (j / rows < intensity) { 
+                grid.children[boxIndex].style.backgroundColor = `rgba(0, 255, 0, ${intensity})`;
             }
         }
     }
-  }
+}
 
     audio.onplay = function () {
         audioContext.resume().then(() => {
