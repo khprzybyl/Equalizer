@@ -1,8 +1,8 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
     const audioInput = document.getElementById('audioUpload');
     const audio = document.getElementById('audio');
     const uploadText = document.getElementById('uploadText');
-    const gridContainer = document.getElementById('gridContainer'); // Container for the grid
+    const gridContainer = document.getElementById('gridContainer');
 
     for (let i = 0; i < 100; i++) {
         let div = document.createElement('div');
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    audioInput.addEventListener('change', function (e) {
+    audioInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (file) {
             audio.src = URL.createObjectURL(file);
@@ -35,12 +35,12 @@ document.addEventListener('DOMContentLoaded', function () {
     let bufferLength = analyser.frequencyBinCount;
     let dataArray = new Uint8Array(bufferLength);
 
-  function updateGrid() {
+ const updateGrid = ()=> {
     requestAnimationFrame(updateGrid);
     analyser.getByteFrequencyData(dataArray);
 
-    let columns = 10; 
-    let rows = 10;
+    const columns = 10; 
+    const rows = 10;
 
     for (let i = 0; i < grid.children.length; i++) {
         grid.children[i].style.backgroundColor = 'rgba(0, 0, 0, 0)';
