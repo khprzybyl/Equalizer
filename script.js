@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     const audioInput = document.getElementById('audioUpload');
     const audio = document.getElementById('audio');
-    const grid = document.getElementById('grid');
+    const uploadText = document.getElementById('uploadText');
+    const gridContainer = document.getElementById('gridContainer'); // Container for the grid
 
     for (let i = 0; i < 100; i++) {
         let div = document.createElement('div');
@@ -9,14 +10,20 @@ document.addEventListener('DOMContentLoaded', function () {
         grid.appendChild(div);
     }
 
-  audioInput.addEventListener('change', function (e) {
-      const file = e.target.files[0];
-      if (file) {
-          audio.src = URL.createObjectURL(file);
-          audio.load(); 
-          audio.play(); 
-      }
-  });
+
+    audioInput.addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (file) {
+            audio.src = URL.createObjectURL(file);
+            audio.load(); 
+            audio.play();
+            uploadText.style.display = 'none'; 
+            grid.style.display = 'grid'; 
+        } else {
+            uploadText.style.display = 'block';
+            grid.style.display = 'none';
+        }
+    });
 
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
     let analyser = audioContext.createAnalyser();
@@ -36,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let rows = 10;
 
     for (let i = 0; i < grid.children.length; i++) {
-        grid.children[i].style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
+        grid.children[i].style.backgroundColor = 'rgba(0, 0, 0, 0)';
     }
 
     let midIndex = Math.floor(dataArray.length / 2);
@@ -62,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
         for (let j = 0; j < rows; j++) {
             let boxIndex = (rows - 1 - j) * columns + i;
             if (j / rows < intensity) { 
-                grid.children[boxIndex].style.backgroundColor = `rgba(0, 255, 0, ${intensity})`;
+                grid.children[boxIndex].style.backgroundColor = `rgb(80, 124, 255, ${intensity})`;
             }
         }
     }
