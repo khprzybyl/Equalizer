@@ -1,16 +1,65 @@
-body {
-    font-family: 'Poppins', sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #e8e8e8;
+    background-color: #f5f5f5;
+    font-family: 'Poppins', sans-serif;
 }
 
-.container{
-  background-color: rgb(255, 255, 255);
-  max-width: 400px;
-  padding:20px;
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
 
+.container {
+    width: 100%;
+    max-width: fit-content; 
+    margin: 20px auto; 
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+}
+
+#audio {
+    width: 100%; 
+    height: auto; 
+    margin: 20px 0;
+    display: block;
+} 
+
+
+#audio-input {
+    margin: 20px 0; 
+} 
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(10, 30px); 
+    grid-template-rows: repeat(10, 30px);
+    gap: 3px;
+}
+
+.grid-box {
+    width: 30px;
+    height: 30px;
+    background-color: #ffffff;
+    border: 1px solid #b1bcf2;
+    transition: background-color 0.5s;
+}
+
+input[type="file"] {
+    width:100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
 }

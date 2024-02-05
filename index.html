@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Age Calculator</title>
+    <title>Equalizer</title>
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-  Equalizer
+      <h1>Equalizer</h1>
+      <input type="file" id="audioUpload" accept="audio/*" />
+      <audio id="audio" controls></audio>
+      <div id="grid" class="grid"></div>
     </div>
     <script src="./script.js"></script>
 </body>
