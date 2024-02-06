@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const audioInput = document.getElementById('audioUpload');
     const audio = document.getElementById('audio');
-    const uploadText = document.getElementById('uploadText');
-    const gridContainer = document.getElementById('gridContainer');
 
     for (let i = 0; i < 100; i++) {
         let div = document.createElement('div');
