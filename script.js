@@ -25,46 +25,46 @@ document.addEventListener('DOMContentLoaded', () => {
     let bufferLength = analyser.frequencyBinCount;
     let dataArray = new Uint8Array(bufferLength);
 
-    const updateGrid = ()=> {
-        requestAnimationFrame(updateGrid);
-        analyser.getByteFrequencyData(dataArray);
+const updateGrid = () => {
+    requestAnimationFrame(updateGrid);
+    analyser.getByteFrequencyData(dataArray);
 
-        const columns = 10; 
-        const rows = 10;
+    const columns = 10; 
+    const rows = 10;
+    const maxIntensity = 255;
 
-        for (let i = 0; i < grid.children.length; i++) {
-            grid.children[i].style.backgroundColor = 'rgba(0, 225, 0, 0)';
+    for (let i = 0; i < grid.children.length; i++) {
+        grid.children[i].style.backgroundColor = 'rgba(0, 0, 0, 0)';
+    }
+
+    const dataPointsPerColumn = Math.floor(dataArray.length / columns);
+
+    for (let i = 0; i < columns; i++) {
+        let frequencySum = 0;
+        let startIndex = i * dataPointsPerColumn;
+        let endIndex = (i === columns - 1) ? dataArray.length : startIndex + dataPointsPerColumn;
+
+        for (let j = startIndex; j < endIndex; j++) {
+            frequencySum += dataArray[j];
         }
 
-        let midIndex = Math.floor(dataArray.length / 2);
-        let quarterIndex = Math.floor(dataArray.length / 4);
+        let intensity = (frequencySum / (endIndex - startIndex)) / maxIntensity;
+        let boxesToColor = Math.ceil(intensity * rows);
 
-        for (let i = 0; i < columns; i++) {
-            let frequencySum = 0;
-            let totalSamples = 0;
-            
-            let startIndex = midIndex + (i - columns / 2) * (quarterIndex / 2);
-            let endIndex = startIndex + (quarterIndex / 3); 
-            
-            startIndex = Math.max(0, startIndex);
-            endIndex = Math.min(dataArray.length, endIndex);
+        for (let j = 0; j < rows; j++) {
+            let boxIndex = (rows - 1 - j) * columns + i;
+            if (j < boxesToColor) {
 
-            for (let j = startIndex; j < endIndex; j++) {
-                frequencySum += dataArray[j];
-                totalSamples++;
-            }
-    
-            let intensity = totalSamples > 0 ? (frequencySum / totalSamples) / 255 : 0;
-            
-            for (let j = 0; j < rows; j++) {
-                let boxIndex = (rows - 1 - j) * columns + i;
-                if (j / rows < intensity) { 
-                    grid.children[boxIndex].style.backgroundColor = `rgb(80, 124, 255, ${intensity})`;
-                }
+                let baseIntensity = intensity > 0 ? 1 : 0;
+                
+                let gradientEffect = (1 - (j / rows));
+                let boxIntensity = baseIntensity * gradientEffect;
+                
+                grid.children[boxIndex].style.backgroundColor = `rgba(80, 124, 255, ${boxIntensity})`;
             }
         }
     }
-
+}
     audio.onplay = function () {
         audioContext.resume().then(() => {
             updateGrid();
