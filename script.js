@@ -6,8 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const file = e.target.files[0];
         if (file) {
             audio.src = URL.createObjectURL(file);
-            audio.load(); 
-            audio.play();
          }
     });
 
