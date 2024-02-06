@@ -17,12 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             audio.src = URL.createObjectURL(file);
             audio.load(); 
             audio.play();
-            uploadText.style.display = 'none'; 
-            grid.style.display = 'grid'; 
-        } else {
-            uploadText.style.display = 'block';
-            grid.style.display = 'none';
-        }
+         }
     });
 
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -43,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const rows = 10;
 
     for (let i = 0; i < grid.children.length; i++) {
-        grid.children[i].style.backgroundColor = 'rgba(0, 0, 0, 0)';
+        grid.children[i].style.backgroundColor = 'rgba(0, 225, 0, 0)';
     }
 
     let midIndex = Math.floor(dataArray.length / 2);
