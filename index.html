@@ -10,18 +10,21 @@
 </head>
 <body>
     <div class="container">
+        
+        <h1>Equalizer</h1>      
+        
+        <div id="uploadText" class="file-info">
+            <img src="assets/equalizer.svg" alt="Upload Icon" />
+            <p>Don’t just listen to the rhythm, watch it flow on the grid!</p>
+        </div>
 
-      <h1>Equalizer</h1>
+        <div id="gridContainer">
+            <div id="grid" class="grid"></div>
+        </div>
 
-      <input type="file" id="audioUpload" accept="audio/*" />
-      <audio id="audio" controls></audio>
-  
-      <div id="uploadText" class="file-info">Upload your favorite music</div>
+        <audio id="audio" controls></audio>
+        <input type="file" id="audioUpload" accept="audio/*" class="input-file"/>
 
-      <div id="gridContainer">
-          <div id="grid" class="grid"></div>
-      </div>
-  
     </div>
     <footer><p>Created by Katarzyna Przybył</p></footer>
     <script src="./script.js"></script>
