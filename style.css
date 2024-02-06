@@ -42,7 +42,7 @@ h1 {
     display: block;
 } 
 
-#grid {
+.grid {
     display: grid; 
     grid-template-columns: repeat(10, 1fr);
     gap: 1px;
@@ -73,7 +73,6 @@ input[type="file"]::-webkit-file-upload-button {
     padding: 10px 20px;
     cursor: pointer;
     width: 100%;
-    text: none;
 }
 
 input[type="file"]:focus {
